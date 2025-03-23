@@ -5,15 +5,18 @@ import jwt from 'jsonwebtoken';
 import { env } from './config/enviroment.js'
 import dotenv from 'dotenv'
 import { APIs_V1 } from './routes/V1/index.js';
+import { APIs_AUTH } from './routes/auth/index.js';
 
 dotenv.config()
 
 const START_SERVER = () => {
   const app = express()
+  app.use(express.json())
 
 	// const PORT = env.APP_PORT
 	// const HOST = env.APP_HOST
   app.use('/v1', APIs_V1)
+  app.use('/auth', APIs_AUTH)
 
 	app.get('/', async (req, res) => {
 		// console.log(await GET_DB().listCollections().toArray())
